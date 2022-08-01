@@ -1,0 +1,59 @@
+Let $n,k,s,q$ be some positive integers and $\Sigma_{q} = \left\{0,1,2,\ldots,q-1\right\}$ be an alphabet of size $q$. A \emph{sequence} $\bfs=\left(s_{1},s_{2},\ldots,s_{n}\right)\in\Sigma^{n}_{q}$ is over an alphabet $\Sigma$, that is, $s_{i}\in\Sigma_{q}$. This thesis only focuses on the case $q=2$ and thus drop $q$ in notation for simplicity. Sequence $\bfs=s_{1}s_{2}\ldots s_{n}\in\Sigma^{n}$ is also written without ambiguity. The window (substring) $(s_{i},s_{i+1},\ldots,s_{j})$ is denoted by $s[i,j]$. 
+
+Given two sequences $\bfx=x_{1}x_{2}\ldots x_{m}$ and $\bfy=y_{1}y_{2}\ldots y_{n}$, denote the concatenation of $\bfx$ and $\bfy$ to be $\bfx\bfy $ $=x_{1}x_{2}\ldots x_{m}y_{1}y_{2}\ldots y_{n}$, and denote $\bfx^{k}$ the concatenation of $k$ copies of $\bfx$. It is said that $\bfx$ is smaller than $\bfy$, denoted $\bfx<\bfy$, if there is an index $t\geq1$, such that $x_{i}=y_{i}$, $\forall i\leq t$, and $x_{t+1}<y_{t+1}$. Note that empty sequence is smaller than $0$.
+
+\begin{definition}
+    A  sequence $\bfs = (s_1,s_2,\ldots,s_n)$ is called a $s$-run length limited (RLL) sequence of length $n$ if each run of 0's in the sequence $\bfs$ has length at most $s$, or in other words, the sequence $\bfs$ does not contain $s+1$ consecutive 0's as a substring. 
+A set of $s$-RLL sequences of length $n$ is called a $s$-RLL code and denoted $C(n,s)$.
+\end{definition}
+
+Denote $W(n,s)$ the set of all $s$-RLL sequences of length $n$ and note that $W(n,s)$ is the maximal $s$-RLL code. The $s$-RLL code $C(n,s)$ and the cardinality $|W(n,s)|$ has been well-studied in the literature~\cite{blake1982enumeration, kurmaev2011constant}. This thesis presents the recursive formula of $\card{W(n,s)}$ with proof.
+
+\begin{lemma}[Cardinality of $W(n,s)$]\label{lem:card_W}
+    Let $n,s$ be two non-negative integers. Then
+    \begin{align*}
+        \lvert W(n,s) \rvert &= 2^{s},\ \forall 0\leq n\leq s \\
+        \lvert W(n,s) \rvert &= \sum_{i=0}^{s} \lvert W(n-i-1,s)\rvert,\ \forall n>s
+    \end{align*}
+\end{lemma}
+\begin{proof}
+    For the first equation, when $n\leq s$, all sequences of length $n$ belong to $W(n,s)$. Hence $\lvert W(n,s) \rvert = 2^{n},\ \forall 0\leq n\leq s$. 
+    
+    When $n>s$, every sequence in $W(n,s)$ is of the form $0^{i}1\bfx$, where $\bfx \in W(n-i-1,s)$ for $0 \leq i \leq s$. Additionally, for every $\bfx\in W(n-i-1,s)$, the sequence $0^{i}1\bfx$ is an element of $W(n,s)$. This bijection brings the second equation.
+\end{proof}
+
+The very first values of $\card{W(n,s)}$ are listed in table~\ref{tab:values_of_W}. The first row includes values of $n$, while the first column contains value of $s$. The crossed cell of column with $n=i$ and row with $s=j$ holds value of $W(i,j)$. 
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{||c||c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+    \hline\hline
+        s, n & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12\\
+        \hline\hline
+        1 & 1 & 2 & 3 & 5 & 8 & 13 & 21 & 34 & 55 & 89 & 144 & 233 & 377\\
+        2 & 1 & 2 & 4 & 7 & 13 & 24 & 44 & 81 & 149 & 274 & 504 & 927 & 1705\\ 
+        3 & 1 & 2 & 4 & 8 & 15 & 29 & 56 & 108 & 208 & 401 & 773 & 1490 & 2872\\
+        4 & 1 & 2 & 4 & 8 & 16 & 31 & 61 & 120 & 236 & 464 & 912 & 1793 & 3525\\
+        5 & 1 & 2 & 4 & 8 & 16 & 32 & 63 & 125 & 248 & 492 & 976 & 1936 & 3840\\
+        6 & 1 & 2 & 4 & 8 & 16 & 32 & 64 & 127 & 253 & 504 & 1004 & 2000 & 3984\\
+        7 & 1 & 2 & 4 & 8 & 16 & 32 & 64 & 128 & 255 & 509 & 1016 & 2028 & 4048\\
+        8 & 1 & 2 & 4 & 8 & 16 & 32 & 64 & 128 & 256 & 511 & 1021 & 2040 & 4076\\
+        9 & 1 & 2 & 4 & 8 & 16 & 32 & 64 & 128 & 256 & 512 & 1023 & 2045 & 4088\\
+        \hline
+    \end{tabular}
+    \caption{Values of $W(n,s)$ for all $n=\overline{0,12}$ and $s=\overline{1,9}$.}
+    \label{tab:values_of_W}
+\end{table}
+
+\begin{definition}[Run length limited de Bruijn (\gls{RdB}) sequence]
+    A sequence $s=(s_{1},s_{2},\ldots,s_{n})\in\Sigma^{n}$ is called a $(k,s)$-run length limited de Bruijn (\gls{RdB}) sequence of length $n$ if it is a de Bruijn sequence of order $k$ and a $s$-RLL sequence of length $n$.
+\end{definition}
+Example~\ref{exp:RdB} gives an instance of \gls{RdB} sequence.
+\begin{example}[$(5,2)$-RdB sequence]\label{exp:RdB}
+    For $k=5,s=2$, a $(5,2)$-RdB sequence of length $27$ is $s=(0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0)$. 
+\end{example}
+
+Note that, when $s\geq k$, a $(k,s)$-RdB sequence is just an original de Bruijn sequence. If $s=k-1$, any $(k,k-1)$-RdB sequence can be achieved from a de Bruijn sequence removing $1$ letter $0$ in the subsequence $0^k$. Based on those observations, case $s\geq k-1$ is considered to be trivial. Therefore, this thesis concentrates on the case $s<k-1$. And thus, in the rest of this thesis, $s$ is always assumed to be smaller than $k-1$.
+
+It is well-known that given $k$, the maximal length $n$ of a binary acyclic de Bruijn sequence is $n=2^{k}+k-1$. Let $N(k,s)$ be the maximal length of a $(k,s)$-RdB sequence. This thesis are interested in finding the exact value of $N(k,s)$. The motivation of this task is explain clearly in section \ref{sec:rate}, which concerns the rate of a sequence. 
+
+For further demonstration, the next section presents the graph presentation for $(k,s)$-RdB sequence.

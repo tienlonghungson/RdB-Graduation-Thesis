@@ -1,0 +1,191 @@
+The rate of de Bruijn sequences can be determined by understanding its longest length. Section \ref{sec:rate} provides a formal definition of rate and maximal asymptotic rate of de Bruijn sequence. This section concerns in finding the longest simple path in $G_{k,s}$, which corresponds to the longest $(k,s)$-RdB sequence.
+
+Let $N(k,s)$ is the maximal length of a $(k,s)$-RdB sequence, and $\ell(G_{k,s})$ be the length of the longest simple path in $G_{k,s}$. Recall that a length $l$ simple path in $G_{k,s}$ is equivalent to a $(k,s)$-RdB sequence of length $l+k-1$. Therefore, $N(k,s) = \ell(G_{k,s})+k-1$. 
+
+The de Bruijn graph $G_{k}$ is actually a Eulerian graph because each vertex has exactly two in-coming edges and two out-coming edges. This results in its longest path visits each edges exactly once and has length $2^{k}$. However, $(k,s)$-RdB graph $G_{k,s}$ doesn't have the same such property since the in-degree and out-degree of each vertex can be one or two. Thus, a simple path which visits all edges of the graph may not exists. 
+
+To overcome this issue, the upper bound $\mathbb{U}(k,s)$ for the length of the longest simple path is first determined in this section. Then, $\mathcal{U}(k,s)=\mathbb{U}(k,s)+k-1$ is the upper bound for the length of longest $(k,s)$-RdB sequence. This work later proves that such bound can be achieved by proposing an efficient encoder returning a sequence of length $\mathcal{U}(k,s)$ in section \ref{subsect:encoder}. Hence, it's sufficient to conclude that the upper bound $\mathbb{U}(k,s)$ is also the length of the longest simple path.
+
+Before deriving the explicit formula of maximal length, it's necessary to analyze more meticulously the in-degree and out-degree of all vertices. Given $0\leq i,j\leq s$, define:
+
+\begin{align*}
+    V^{k-1,s} = \Bigl\{ \bfx: \bfx\in V^{k-1,s}, &x[1,i+1]=0^{i}1,  \\
+    &x[k-1-j,k-1]=10^{j} \Bigl\}
+\end{align*}
+
+That is, $V^{k-1,s}$ is the set of all vertices in $G_{k,s}$ satisfying the first $i+1$ letters are $(0,0,\ldots,0,1)$ and the last $j+1$ letters are $(1,0,0,\ldots,0)$. Lemma~\ref{lem_prop_of_V_ks_ij} summaries the properties of $V^{k-1,s}_{i,j}$ the helps finding $\mathscr{U}(k,s)$.
+
+\begin{lemma}[\textbf{Properties of $V^{k-1,s}_{i,j}$}]\label{lem_prop_of_V_ks_ij}
+    {\color{white}.}
+    
+    % \begin{itemize}
+    %     \item $\card{ V^{k-1,s}_{i,j}} = \card{ W(k-i-j-3,s)} $.
+    %     \item $\sum_{0\leq i,j\leq s}\card{ V^{k-1,s}_{i,j}} = \card{ V^{k-1,s}}\ (= \card{ W(k-1,s)})$.
+    %     \item The in-degree and out-degree of each vertex in $V^{k-1,s}_{i,j}$ (if $V^{k-1,s}_{i,j}\neq\emptyset$) is exactly $1$.
+    %     \item The in-degree and out-degree of each vertex in $V^{k-1,s}_{i,j}$ is exactly $1$ for all $0\leq i,j\leq s-1$.
+    %     \item For each vertex in $V^{k-1,s}_{s,i}\ (0\leq i\leq s-1)$, their in-degree is exactly one and their out-degree is exactly two.
+    %     \item For each vertex in $V^{k-1,s}_{i,s}\ (0\leq i\leq s-1)$, their in-degree is exactly two and their out-degree is exactly one.
+    % \end{itemize}
+    
+    \begin{enumerate}
+        \item $\card{ V^{k-1,s}_{i,j}} = \card{ W(k-i-j-3,s)} $.
+        \item $\sum_{0\leq i,j\leq s}\card{ V^{k-1,s}_{i,j}} = \card{ V^{k-1,s}}\ (= \card{ W(k-1,s)})$.
+        \item The in-degree and out-degree of each vertex in $V^{k-1,s}_{s,S}$ (if $V^{k-1,s}_{s,s}\neq\emptyset$) is exactly $1$.
+        \item The in-degree and out-degree of each vertex in $V^{k-1,s}_{i,j}$ is exactly $1$ for all $0\leq i,j\leq s-1$.
+        \item For each vertex in $V^{k-1,s}_{s,i}\ (0\leq i\leq s-1)$, their in-degree is exactly one and their out-degree is exactly two.
+        \item For each vertex in $V^{k-1,s}_{i,s}\ (0\leq i\leq s-1)$, their in-degree is exactly two and their out-degree is exactly one.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    {\color{white}.}
+    
+    \begin{enumerate}
+        \item For each element $x\in V^{k-1,s}_{i,j}$, its subsequence, $x[i+1,k-2-j]$, can be any sequence of length $k-i-j-3$ such that more than $s$ consecutive letter $0$'s is forbidden. Hence $x[i+1,k-2-j]\in W(k-i-j-3,s)$. Reversely, given an arbitrary sequence $y\in W(k-i-j-3,s)$, the string $0^{i}1y10^{j}$ is a sequence in $V^{k-1,s}_{i,j}$. It comes to the conclusion that there is a bijection from $V^{k-1,s}_{i,j}$ to $W(k-i-j-3,s)$. In other word, $\card{ V^{k-1,s}_{i,j}} = \card{ W(k-i-j-3,s)} $.
+        
+        \item Since $V^{k-1,s}_{i,j}\cup V^{k-1,s}_{i^{\prime},j^{\prime}} = \emptyset$ with $(i,j)\neq(i^{\prime},j^{\prime})$, and $i,j$ cannot exceed $s$, thus, $\sum_{0\leq i,j\leq s}\card{ V^{k-1,s}_{i,j}} = \card{ V^{k-1,s}}$.
+        
+        \item The properties from $(3)$ to $(6)$ can be deduced directly by considering the prefix and suffix of each element in those set.
+    \end{enumerate}
+\end{proof}
+
+% For example, in case $s=1$, all vertices in $V^{k-1,1}_{1,0}$ has one edge coming in and two edges coming out. Hence, the
+
+% All vertices in $V^{k-1,1}_{0,1}$ has two edges coming in and one edges coming out. Furthermore, among two edges coming out of each vertex $v$ in $V^{k-1,s}_{1,0}$, only one of them coming to a vertex $u$ in $V^{k-1,s}_{0,1}$. Similarly, among two edges coming to each vertex $u$ in $V^{k-1,s}_{0,1}$, only one of them coming from a vertex $v$ in $V^{k-1,s}_{1,0}$. Note that, $\card{ V^{k-1,1}_{0,1}} = \card{ V^{k-1,1}_{1,0}} = \card{ W(k-4,1)}$, therefore, there are precisely $\card{ W(k-4,1)}$ edges, each of which go from a vertex in $V^{k-1,1}_{1,0}$ to a vertex in $V^{k-1,1}_{0,1}$. If we remove all these in 
+
+\begin{theorem}[\textbf{Longest simple path}]\label{theo:maximal_length}
+    Let $C=\min{(s-1,k-s-2)}$. The length of the longest path in $G_{k,s}$ is $\mathbb{U}(k,s)$, where:
+    \begin{align}
+        \mathbb{U}(k,s) = \card{ W(k,s)} - \left(\sum_{i=0}^{C}\card{ W(k-i-d-3,s)} - s\right)
+    \end{align}
+\end{theorem}
+
+As mentioned above, proof of theorem \ref{theo:maximal_length} is divided into 2 parts. While the first one claims $\ell(G_{k,s})\leq\mathbb{U}(k,s)$, the second one shows that there exists a sequence cab achieve the length of $\mathbb{U}(k,s)+k-1$. This section provides the proof of the first part (lemma~\ref{lem:upperbound}). Proof for the second part is available in section \ref{sec:construction}. 
+    
+\begin{lemma}\label{lem:upperbound}
+    The longest simple path in $G_{k,s}$'s length cannot exceed $\mathbb{U}(k,s)$, that is, $\ell(k,s)\leq\mathbb{U}(k,s)$.
+\end{lemma}
+    The following definitions and claims are essential to prove lemma~\ref{lem:upperbound}.  
+    
+\begin{definition}[Balance and unbalanced vertex]
+    A vertex with the quantity of in-coming edge equals to the quantity of out-coming edge is called a balanced vertex. A vertex is left-unbalanced if it has $2$ edges coming in and $1$ edges coming out. Reversely, a vertex is right-unbalanced if it has $1$ edge coming in and $2$ edges coming out.
+\end{definition}
+
+% {\color{red} Define a path to be a sequence of edges: $e_{1},e_{2},\cdots,e_{n}$ such that $\tau(e_{i})=\sigma(e_{i+1})$ where $\sigma(e_{i})$ and $\tau(e_{i})$ are initial state and terminal state of edge $e_{i}$ respectively}.
+
+Recall that a path is defined to be a sequence of edges. A vertices $v$ is said to be (lying) in, or belong to a path $\mathcal{P}$, denoted by $v\in\mathscr{P}$, if $v$ has edges in $\mathcal{P}$. It's also fair to say that $\mathcal{P}$ goes through $v$. Besides, $v$ is called the end (or the start) vertex of $\mathcal{P}$ if its last (first) edge ends (begins) at $v$.
+
+Suppose $\mathscr{P}$ to be a longest simple path in $G_{k,s}$. In other word, $\mathscr{P}$ achieves the length $\ell(G_{k,s})$. Some observations about $\mathscr{P}$ is given in the following claims.
+\begin{claim}\label{claim:equal_n_edges}
+    All the vertices in $\mathscr{P}$, if not a start or end vertex, must have the number of in-edges and out-edges equal in $\mathscr{P}$.
+\end{claim}
+\begin{proof}
+    Let $v$ be a vertex in $\mathscr{P}$, $v$ is neither start nor end vertex. Then whenever $\mathscr{P}$ comes to $v$ by an in-edge, it must go out of $v$ by an out-edge. So the claim \ref{claim:equal_n_edges} is true.
+\end{proof}
+
+% \begin{claim}\label{claim:p_not_cycle}
+%     The longest simple path $\mathscr{P}$ is not a cycle.
+% \end{claim}
+% \begin{proof}
+%     Let $\mathscr{P} = (e_{1},e_{2},\ldots,e_{n})$. Denote $\pi(e)$ and $\tau(e)$ to be initial and terminate vertices of $e$ respectively.
+    
+%     Assume to the contrary that $\mathscr{P}$ is a cycle. Then $\tau(e_{i})=\pi(e_{i+1})$ for all $1\leq i\leq n$, where $e_{n+1}=e_{1}$. 
+    
+%     \begin{enumerate}
+%         \item It can be proved that there is an edge $e^{\prime}\notin \mathscr{P}$ such that either its terminal or its initial vertex $v$ is in $\mathscr{P}$.
+%         \begin{itemize}
+%             \item If all of vertices in $\mathscr{P}$ are balanced, since RdB graph is connected, there exists an edge (either in or out) of an vertex, for instance, $\tau(e_{i})\in\mathscr{P}$ connecting to an unbalanced vertex $u\notin\mathscr{P}$.
+%             \item Otherwise, without loss of generalization, let $\tau(e_{i})$ be an left-unbalanced vertex. Since the number of in-edges and out-edges of $\tau(e_{i})$ equal (by claim~\ref{claim:equal_n_edges}), one out-edge $e^{\prime}$ of $\tau(e_{i})$ doesn't belong to $\mathscr{P}$.
+%         \end{itemize}
+%         \item Suppose that $e^{\prim}$ is such an edge, and $\pi(e^{\prime})=\tau(e_{i})$. Then the simple path $(e_{i+1},e_{i+2},\ldots,e_{i},e^{\prime})$ is a proper path in RdB, but longer than $\mathscr{P}$, which is a contradiction. 
+%     \end{enumerate}
+%     The proof is complete.
+% \end{proof}
+
+\begin{claim}\label{claim:balance_ver}
+    Every balance vertex in $\mathscr{P}$ has their quantity of in-edges and out-edges in $\mathscr{P}$ equal, even if one of them are start or end vertex.
+\end{claim}
+\begin{proof}
+    Let $v$ be a balanced vertex and $\mathscr{P}$ goes through $v$. If $v$ is neither end nor start vertex, by claim~\ref{claim:balance_ver}, $v$ has the number of in-edges and out-edges in $\mathscr{P}$ equal. 
+    
+    Without loss of generality, assume that $v$ is the start vertex. This results in the number of out-edges of $v$ is equal or has $1$ edges more than its number of out-edges. If these two quantity are equal, the proof is done. Otherwise, denote $e^{\prime}$ to be one of $v$'s in-edges not belong to $\mathscr{P}$. Then the path $\mathscr{P}_{1} = \{e^{\prime}\}\cup\mathscr{P}$ beginning at $e^{\prime}$ is a proper simple path RdB graph, but longer than $\mathscr{P}$, which contradicts to the assumption about the longest property of $\mathscr{P}$.
+\end{proof}
+\begin{claim}\label{claim:shortes_right-left}
+    Let $u=0^{s}1x1_{t}0^{j}$ be a right-unbalanced vertex. Then the shortest path going from $u$ to an arbitrary left-unbalanced vertex lengthen $s-j$.
+\end{claim}
+\begin{proof}
+    A left-unbalanced vertex is represented by a sequence whose suffix of length $s$ is filled by $0$. Hence, a path from $u$ to a left-unbalanced vertex must contain at least $s-j$ edges labeled $0$. In fact, a path of length $s-j$ connecting $u$ to a left-unbalanced vertex exists, which is the path of all $0$ labeled edges. This path comes from $u$ to $0^{s-j}1x1_{t}0^{s}$.
+\end{proof}
+% \begin{proof}
+%     Let $v$ be a vertex in $\ell(G_{k,s})$. We just need to consider if $v$ is start or end vertex, the other cases have already been proved by claim \ref{claim:equal_n_edges}.
+    
+%     Assume that $v$ is the start vertex and suppose to the contrary 
+% \end{proof}
+
+\begin{proof}[Proof for lemma~\ref{lem:upperbound}]
+    Define $1x1_{t}$ to be a sequence of length $t$ such that start and end letters are both $1$. Let $$\mathscr{R}=\bigcup_{j=0}^{C}\left\{\bfu:\bfu=0^{j}1x1_{t}0^{s},s+t+j=k-1\right\}$$ be the set of all left-unbalanced vertices
+    
+    Let $\bfv=0^{j}1x1_{t}0^{s}$ be an arbitrary vertex in $\mathscr{R}$ such that $\bfv$ isn't the end-vertex of path $\mathscr{P}$. 
+    
+    \begin{enumerate}
+        \item It can be proved that there is a path $\mathcal{P}_{v}$ of length $s-j$ satisfying all of its edges not lying in $\mathscr{P}$ and its end-vertex is $\bfv$.
+            The path $\mathcal{P}_{v}$ is constructed backwardly as follow:
+            
+            Starts with $\mathcal{P}_{v}=\emptyset$. As $\bfv$ has $2$ in-edges and $1$ out-edges, there's at least $1$ in-edge $e_{v}$ of $\bfv$ not lying in $\mathscr{P}$. Of course, $e_{v}$'s label is $0$. Adds $e_{v}$ to $\mathscr{P}_{v}$. Let $a_{1}0^{j}1x1_{t}0^{s-1}= \pi(e_{v})$ be the initial state of $e_{v}$. If $\pi(e_{v})$ is a balance vertex, then by the claim \ref{claim:balance_ver}, there also must be at least $1$ in-edge of $\pi(e_{v})$ not lying in $\mathscr{P}$. Continue adding this edge to the head of $\mathcal{P}_{v}$. Denote $a_{2}a_{1}0^{j}1x10^{s-2}$ to be the initial state of this edge. Now, $\mathcal{P}_{v}$ can be represented as below:
+            
+            \[\mathcal{P}_{v}=[\left(a_{2}a_{1}0^{j}1x1_{t}0^{s-2},a_{1}0^{j}1x1_{t}0^{s-1}\right), \left(a_{1}0^{j}1x1_{t}0^{s-1},0^{j}1x1_{t}0^{s}\right)]\]
+            
+            Assume inductively that:
+            
+            \begin{align*}
+                \mathcal{P}_{v}= \Bigl[&\left(a_{l}\cdots a_{2}a_{1}0^{j}1x1_{t}0^{s-l},a_{l-1}\cdots a_{1}0^{j}1x1_{t}0^{s-(l-1)}\right),\cdots,\\
+                &\left(a_{2}a_{1}0^{j}1x1_{t}0^{s-2}, a_{1}0^{j-1}1x1_{t}0^{s-1}\right),\\
+                &\left(a_{1}0^{j-1}1x1_{t}0^{s-1},0^{j}1x1_{t}0^{s}\right)\Bigl]   
+            \end{align*}
+            with $l\leq s-j$.
+            
+            If $l=s-j$, the proof is done. Otherwise, it's obvious that $$a_{l}\cdots a_{2}a_{1}0^{j}1x1_{t}0^{s-l}$$ is balance, hence, by claim \ref{claim:balance_ver}, it also has at least $1$ in-edge not lying in $\mathscr{P}$, and one can continue adding such edge to the head of $\mathcal{P}_{v}$.
+            
+        \item It can be shown that for each $u,v\in\mathscr{R}$ such that neither $u$ nor $v$ is the end vertex of the last edge of $\mathscr{P}$, paths $\mathcal{P}_{u}$ and $\mathcal{P}_{v}$ are edge-disjoint.
+    
+            Represent $\mathcal{P}_{u} = [e_{u,1},e_{u,2},\cdots,e_{u,i}]$, $\mathcal{P}_{v}=[e_{v,1},e_{v,2},\cdots,e_{v,j}]$. Assume to the contrary that $\exists t\leq i,l\leq j$ satisfying $e_{u,t}=e_{v,l}$. Without loss of generalization, we suppose that $i-t\leq j-l$. As all edges in $\mathcal{P}_{u}$ and $\mathcal{P}_{v}$ are labeled $0$, we must have $e_{u,t+1}=e_{v,l+1},\cdots,e_{u,i}=e_{v,l+(i-t)}$. 
+            
+            If $l+i-t=j$, we have $\mathcal{P}_{u}$ and $\mathcal{P}_{v}$ have the same last edge but different terminal states, which is impossible. Otherwise, the path $e_{v,l+i-t+1},\cdots,e_{v,j}$ is the path connecting $u$ to $v$. But the length of this path is smaller than $s$, which is also absurd.
+    \end{enumerate}
+    % $(1)$ It can be proved that there is a path $\mathcal{P}_{v}$ of length $s-j$ satisfying all of its edges not lying in $\mathscr{P}$ and its end-vertex is $\bfv$.
+    
+    % The path $\mathcal{P}_{v}$ is constructed backwardly as follow:
+    
+    % Starts with $\mathcal{P}_{v}=\emptyset$. As $\bfv$ has $2$ in-edges and $1$ out-edges, there's at least $1$ in-edge $e_{v}$ of $\bfv$ not lying in $\mathscr{P}$. Of course, $e_{v}$'s label is $0$. Adds $e_{v}$ to $\mathscr{P}_{v}$. Let $a_{1}0^{j}1x1_{t}0^{s-1}= \pi(e_{v})$ be the initial state of $e_{v}$. If $\pi(e_{v})$ is a balance vertex, then by the claim \ref{claim:balance_ver}, there also must be at least $1$ in-edge of $\pi(e_{v})$ not lying in $\mathscr{P}$. Continue adding this edge to the head of $\mathcal{P}_{v}$. Denote $a_{2}a_{1}0^{j}1x10^{s-2}$ to be the initial state of this edge. Now, $\mathcal{P}_{v}$ can be represented as below:
+    
+    % $\mathcal{P}_{v}=[\left(a_{2}a_{1}0^{j}1x1_{t}0^{s-2},a_{1}0^{j}1x1_{t}0^{s-1}\right), \left(a_{1}0^{j}1x1_{t}0^{s-1},0^{j}1x1_{t}0^{s}\right)]$
+    
+    % Assume inductively that:
+    
+    % \begin{align*}
+    %     \mathcal{P}_{v}= \Bigl[&\left(a_{l}\cdots a_{2}a_{1}0^{j}1x1_{t}0^{s-l},a_{l-1}\cdots a_{1}0^{j}1x1_{t}0^{s-(l-1)}\right),\cdots,\\
+    %     &\left(a_{2}a_{1}0^{j}1x1_{t}0^{s-2}, a_{1}0^{j-1}1x1_{t}0^{s-1}\right),\\
+    %     &\left(a_{1}0^{j-1}1x1_{t}0^{s-1},0^{j}1x1_{t}0^{s}\right)\Bigl]   
+    % \end{align*}
+    % with $l\leq s-j$.
+    
+    % If $l=s-j$, the proof is done. Otherwise, it's obvious that $a_{l}\cdots a_{2}a_{1}0^{j}1x1_{t}0^{s-l}$ is balance, hence, by claim \ref{claim:balance_ver}, it also has at least $1$ in-edge not lying in $\mathscr{P}$, and one can continue adding such edge to the head of $\mathcal{P}_{v}$.
+    
+    % $(2)$ It can be shown that for each $u,v\in\mathscr{R}$ such that neither $u$ nor $v$ is the end vertex of the last edge of $\mathscr{P}$, paths $\mathcal{P}_{u}$ and $\mathcal{P}_{v}$ are edge-disjoint.
+    
+    % Represent $\mathcal{P}_{u} = [e_{u,1},e_{u,2},\cdots,e_{u,i}]$, $\mathcal{P}_{v}=[e_{v,1},e_{v,2},\cdots,e_{v,j}]$. Assume to the contrary that $\exists t\leq i,l\leq j$ satisfying $e_{u,t}=e_{v,l}$. Without loss of generalization, we suppose that $i-t\leq j-l$. As all edges in $\mathcal{P}_{u}$ and $\mathcal{P}_{v}$ are labeled $0$, we must have $e_{u,t+1}=e_{v,l+1},\cdots,e_{u,i}=e_{v,l+(i-t)}$. 
+    
+    % If $l+i-t=j$, we have $\mathcal{P}_{u}$ and $\mathcal{P}_{v}$ have the same last edge but different terminal states, which is impossible. Otherwise, the path $e_{v,l+i-t+1},\cdots,e_{v,j}$ is the path connecting $u$ to $v$. But the length of this path is smaller than $s$, which is also absurd.
+    
+    Summary, for each vertex in $\mathscr{R}$ such that $v$ isn't the end-vertex of the last edge in path $\mathscr{P}$ , there is a path $\mathcal{P}_{v}$ of length $s-j$ satisfying all of its edges not lying in $\mathscr{P}$ and takes $v$ to be its end-vertex. Moreover, all these such path are edge-disjoint, and the can be only $1$ end-vertex of the last edge in path $\ell(G_{k,s})$, the total edges of all such path $\mathcal{P}_{u}$ is:
+    \begin{align*}
+        \sum_{i=0,i\neq j}^{C} &(s-i)\lvert W(k-s-i-3,s) \rvert \\
+        + &(s-j)(\lvert W(k-s-j-3,s)\rvert-1)\\
+        = \sum_{i=0}^{C} &(s-i)\lvert W(k-s-i-3,s) \rvert - (s-j) \\
+        \geq \sum_{i=0}^{C} &(s-i)\lvert W(k-s-i-3,s) \rvert -s  
+    \end{align*}
+    This means at least $\sum_{i=0}^{C} (s-i)\lvert W(k-s-i-3,s) \rvert -s$ edges not lying in $\mathscr{P}$. As the number of edges in $(k,s)$-RdB is $\lvert W(k,s)\rvert$, the length of longest path $\mathscr{P}$ can not exceed : 
+    \[\lvert W(k,s)\rvert - (\sum_{i=0}^{C} (s-i)\lvert W(k-s-i-3,s) \rvert- s)\]
+    This concludes our theorem.
+\end{proof}
+
+Define $\mathcal{U}(k,s) = \mathbb{U}(k,s)+(k-1)$, then $\mathcal{U}(k,s)$ is length of the longest $(k,s)$-RdB sequence.

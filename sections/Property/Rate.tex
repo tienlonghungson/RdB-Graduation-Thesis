@@ -1,0 +1,110 @@
+For every $(k,s)$-RdB sequence, their rate is defined as follows:
+\begin{definition}[Rate]
+    Denote $R(\bfx_{k,s})$ to be the rate of a $(k,s)$-RdB sequence $\bfx_{k,s}$, then:
+    \begin{align}
+        R(\bfx_{k,s}) = \dfrac{\log\left(\card{\bfx_{k,s}}\right)}{k}
+    \end{align}
+    where the base of logarithm function is $\left\lvert\Sigma\right\rvert=2$.
+\end{definition}
+
+The rates of sequences are the proportion of the data-stream that is useful (non-redundant), tell how much useful information is transmitted. The sequence's rate actually originates from information rate. Recall that, in definition~\ref{def:information_rate}, the rate $R_{C}$ of a code $C$ consisting of length $n$ $q$-ary sequences is $R_{C}=\dfrac{\log_{q}\left(\card{C}\right)}{n}$. If a $(k,s)$-RdB sequence $x_{k,s}$ is considered to be a code $C_{k,s}$, each of its size $k$ windows is treated as a codeword. The size of $C_{k,s}$ is exactly the length of $x_{k,s}$ minus $k$, but the offset $k$ can be omitted under log calculation. Hence: $$R_{C_{k,s}}= \dfrac{\log_{q}\left(\card{C_{k,s}}\right)}{n} = \dfrac{\log(\card{\bfx_{k,s}})}{k} = R(x_{k,s})$$. That is to say, $R(\bfx_{k,s})$ is eventually a kind of information rate.
+
+Note that, a high rate is usually preferred. Accordingly, with each given pair $(k,s)$, the maximal rate of all $(k,s)$-RdB sequence is defined.
+\begin{definition}[Maximal rate]
+    Given $k$ and $s$, the maximal rate $R_{k,s}$ of all $(k,s)$-RdB sequences is:
+    \begin{align}
+        R_{k,s} = \dfrac{\log(N(k,s))}{k}
+    \end{align}
+\end{definition}
+
+% For the rate $R_{k,s}$, if one cares about the very large $k$, it is when the maximal asymptotic rate of sequence comes to play.
+
+The maximal asymptotic rate is concerned in case $k$ appears to be very large.
+\begin{definition}[Maximal asymptotic rate]
+    Denote $R_{s}$ to be the maximal asymptotic rate of $(k,s)$-RdB sequences, then:
+    \begin{align}
+        R_{s} = \lim_{k\to\infty}\dfrac{\log(N(k,s))}{k}
+    \end{align}
+\end{definition}
+
+Having the explicit formula of the length of sequence $\bfc_{k,s}$ determined makes it easier to calculate the maximal asymptotic rate of the $(k,s)$-RdB sequence.
+
+Theorem \ref{theo:rate_1} below shows that the rate of $(k,1)$-RdB sequence is better than the rate of Hybrid de Bruijn sequence. Therefore, we can use $(k,1)$-RdB sequence for the system in \cite{zhang2021timing} instead to increase rate, speed of encoding and decoding for the transmitted signals.
+
+\begin{theorem}\label{theo:rate_1}
+    \begin{align}
+        R_{1} = 0.6942
+    \end{align}
+\end{theorem}
+\begin{proof}
+    Recall that $N(k,1) = \card{W(k,1)} - \card{W(k-4,1)}$, and $\{\card{W(k,1)}\}$ is a Fibonacci sequence with: 
+    \[\card{W(k,s)} = \dfrac{\phi^{k+2}+\varphi^{k+2}}{\sqrt{5}}-\dfrac{\phi^{k-2}-\varphi^{k-2}}{\sqrt{5}} + k\]
+    where $\phi = \dfrac{1+\sqrt{5}}{2}$ and $\varphi = \dfrac{1-\sqrt{5}}{2}$.
+    And hence:
+    \begin{align*}
+        R_{1} &= \lim_{k\to\infty}\dfrac{\log(N(k,1))}{k} \\
+        &= \lim_{k\to\infty}\dfrac{ \log\left( \left(\phi^{k}+\varphi^{k}\right).\dfrac{\phi^{2}-\varphi^{2}}{\sqrt{5}}+k \right) }{k} \\
+        &= \log(\phi) \approx 0.6942
+    \end{align*}
+\end{proof}
+
+The following theorem is the generalization of theorem \ref{theo:rate_1}.
+\begin{theorem}[Maximal asymptotic rate of RdB sequence]\label{theo:rate_s}
+    Let $k$ be a positive integer. Then:
+    \begin{align}
+        R_{s} = \log(\lvert\omega\rvert)
+    \end{align}
+    where $\omega$ is the root of equation: %\inlineequation[eq:inline]{x^{s+1}-x^{s}-\ldots-x-1 = 0}
+    \begin{equation}
+        x^{s+1}-x^{s}-\ldots-x-1 = 0\label{eq:char_eq}
+    \end{equation}
+    such that $\lvert\omega\rvert$ is largest.
+\end{theorem}
+\begin{proof}
+    
+    The root $\omega$ is actually a Pisot number. More particularly, $\omega$ is the only positive roots of~\ref{eq:char_eq} lying in the interval $(1,2)$, the other roots are in the open disk $\left\{z\in\mathbb{C},\card{z}<1\right\}$. Also, note that $x^{s+1}-x^{s}-\ldots-x-1=0$ is the characteristic equation of $W(k,s)$. Therefore, with $k$ big enough, $\card{W(k,s)}$ can be estimated as follows: \[\card{W(k,s)} \approx a.\lvert\omega\rvert^{k}\] whereas $a$ is a positive constant. Thus:
+    \begin{align*}
+        N(k,s) &\approx \sum_{t=k-s}^{k}(k-t+1)a\lvert\omega\rvert^{t-2} + s + k - 1\\
+        &= \lvert\omega\rvert^{k-s-2}\left( \sum_{t=k-s}^{k}a(k-t+1)\lvert\omega\rvert^{t-k+s} + \dfrac{s+k-1}{\lvert\omega\rvert^{k-s-2}}\right)\\
+        &= \lvert\omega\rvert^{k-s-2}\left( \sum_{i=0}^{s}a(i+1)\lvert\omega\rvert^{s-1} + \dfrac{s+k-1}{\lvert\omega\rvert^{k-s-2}}\right) 
+    \end{align*}
+
+    So, we obtain:
+    \begin{align*}
+        R_{k} &= \lim_{k\to\infty}\dfrac{\log\left( \lvert\omega\rvert^{k-s-2}\left(\sum_{i=0}^{s}a(i+1)\lvert\omega\rvert^{s-1}+\dfrac{s+k-1}{\lvert\omega\rvert^{k-s-2}}\right)\right)}{k} \\
+        &= \lim_{k\to\infty}\dfrac{(k-s-2)\log(\lvert\omega\rvert)}{k} + \lim_{k\to\infty}\dfrac{\log\left(\sum_{i=0}^{s}a(i+1)\lvert\omega\rvert^{s-i}+\dfrac{s+k-1}{\lvert\omega\rvert^{k-s-2}}\right)}{k}\\
+        &= \log(\lvert\omega\rvert)
+    \end{align*}
+    
+\end{proof}
+% \begin{figure*}[!ht]
+%     \centering
+%       \begin{subfigure}{0.9\linewidth}
+%         \centering
+%         \includegraphics[scale=0.23]{fig/Legend.png}
+%         \label{fig:neg_size}
+%         \end{subfigure}
+%         %\quad
+%       \begin{subfigure}{0.4\linewidth}
+%         \centering
+%         \includegraphics[scale=0.35]{fig/train_percent_Hit@1.pdf}
+%         \caption{Hit@1}
+%         \label{fig:sub_hit1}
+%         \end{subfigure}
+%         %\quad
+%       \begin{subfigure}{0.4\linewidth}
+%         \centering
+%         \includegraphics[scale=0.35]{fig/train_percent_Hit@10.pdf}
+%         \caption{Hit@10}
+%         \label{fig:sub_hit10}
+%         \end{subfigure}
+%         %\quad
+%     \begin{subfigure}{0.4\linewidth}
+%         \centering
+%         \includegraphics[scale=0.35]{fig/train_percent_MRR.pdf}
+%         \caption{MRR}
+%         \label{fig:sub_mrr}
+%         \end{subfigure}
+%     \caption{Saving of labelling effort for entity alignment on D-W-V1 test set}
+%     \label{fig:supervision_percent}
+%  \end{figure*}

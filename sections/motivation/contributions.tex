@@ -1,0 +1,16 @@
+This thesis aims to improve the drawback of the \gls{HdB} sequence listed above. The main task here is designing a code satisfying the constraints of \gls{dBTS} system.
+
+\textbf{Problem Statement}: Designing a high rate sequence which is capable of positioning and avoids two consecutive symbol $0$'s.
+
+Chapter \ref{chapter:RdB} presents the proposed sequence of this thesis, which is called Run length limited de Bruijn sequence (\gls{RdB}). The \gls{RdB} sequence is not just suitable with \gls{dBTS} system, but also have a higher rate than \gls{HdB} sequence. More precisely, rate of the longest \gls{RdB} sequence is \[\log\left(\dfrac{1+\sqrt{5}}{2}\right)\approx0.6942.\]
+
+Chapter \ref{chapter:pro_rlldb_sequence} provides the efficient algorithm to generate one of the longest \gls{RdB} sequence. This algorithm, called an encoder, is based on the \gls{fkm}, which is the fastest method to produce a de Bruijn sequence. Moreover, to locate the position of an abitrary proper subsequence in the whole \gls{RdB} sequence, a decoder is also presented. The proposed decoder modifies the decoding algorithm found by Kociukima .et.al in \cite{kociumaka2016efficient}, which is currently the state of the art method to position a subsequence in the de Bruijn sequence, and therefore, is better than look-up table.
+
+Beside, the \gls{RdB} sequence is even more general and adaptive. More particularly, when the constraint of forbidding pattern $00$ is relaxed, that is, a longer run of bit $0$'s is allowed, the \gls{RdB} sequence can be easily adjusted to make the its rate higher and still suits the system. 
+
+In summary, the contributions of this thesis is listed as follows:
+\begin{itemize}
+    \item Proposing a new kind of sequence (\gls{RdB}), more efficient (higher rate, more general and adaptive) than \gls{HdB} sequences.
+    \item Determining the length of the longest \gls{RdB} sequence.
+    \item Providing fast encoder and decoder based on state of the art algorithms.
+\end{itemize}

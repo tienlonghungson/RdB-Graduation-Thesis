@@ -1,9 +1,13 @@
-Chapter \ref{chapter:motivation} introduces a de Bruijn based system used in Quantum communication. The drawback of this system is the inspiration for the results in this thesis. This thesis's contributions are also summarized in this chapter. 
+A de Bruijn sequence, or a positioning sequence, (of order $k$) is a binary sequence in which every possible length-$k$ string appears exactly once as a substring. The uses of de Bruijn sequence has been found in various field. Recently, a novel application of positioning sequences has been found in quantum communication by \citeauthor{zhang2021timing}. They adapt such sequences into \gls{HdB} sequences to develop a system for synchronising in quantum channels. Though having shown advantages against other methods~\cite{zhang2021timing}, such implementation still has drawbacks and there are rooms for improvements. This thesis focuses on designing a new constrained de Bruijn sequence and proving its efficiency against \gls{HdB} sequence. 
 
-\section{Timing and Synchronization de Bruijn Based System}
+Chapter \ref{chapter:motivation} first briefly introduces the \gls{qkd} protocol, along with the reasonable motivation to study the synchronization mechanisms in satellite quantum channels. Among such mechanisms, the timing and synchronization system proposed by \citeauthor{zhang2021timing} in~\cite{zhang2021timing} is analyzed to recognise its disadvantages. After that, the main results of this thesis, which aim to improve those weaknesses, is summarized. The organization of the whole thesis is given in the end of this chapter. 
+
+% Chapter \ref{chapter:motivation} introduces a de Bruijn based system used in Quantum communication. The drawback of this system is the inspiration for the results in this thesis. This thesis's contributions are also summarized in this chapter. 
+
+\section{Timing and synchronization de Bruijn based system}
 \input{sections/motivation/dBTS}
 
-\section{The Contributions of This Thesis}
+\section{The contributions and organization of this thesis}
 \input{sections/motivation/contributions}
 
 % Chương này có độ dài không quá 10 trang. Chương này sinh viên trình bày về phân tích rõ ngữ cảnh bài toán cũng như các kết quả nghiên cứu tương tự. Đồng thời, sinh viên có thể trình bày thêm về các kiến thức nền tảng.

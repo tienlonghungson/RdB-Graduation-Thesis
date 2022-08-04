@@ -10,6 +10,7 @@ Consider the set $S_{n}$ of all $n!$ permutations of $\left\{1,2,\ldots,n\right\
 
 However, if order-isomorphism is allowed instead of requiring exact match, $U$-cycles of $S_{n}$ exists. More precisely, an $U$-cycle $U_{n}=(a_{0},a_{1},\ldots,a_{n!-1})$, $a_{i}\in\left\{1,2,\ldots,N\right\}$, for $S_{n}$ is $n!$-tuple such that each element of $S_{n}$ is order-isomorphic to exactly one block $(a_{i+1},\ldots,a_{i+n})$, where $a_{i}=a_{j\equiv i(\mod n!)}$. Here, two $n$-tuples $\bfa=\left(a_{1},a_{2},\ldots,a_{n}\right)$ and $\bfb=\left(b_{1},b_{2},\ldots,b_{n}\right)$ are called order-isomorphic, written as $\bfa\sim\bfb$, if $a_{i}<a_{j} \Leftrightarrow b_{i}<b_{j}$ for all $0<i,j\leq n$. An example of $U$-cycle for $S_{3}$ is :
 \[1\ 4\ 5\ 2\ 4 \ 3\]
+
 By order-isomorphism, each $3$-tuple in the above $U$-cycles can be mapped into elements of $S_{3}$ as follow:
 \begin{align*}
     145\sim123 \\
@@ -32,10 +33,13 @@ It is proved that the transition graph of $S_{n}$ is Hamiltonian, and a Hamilton
 
 Actually, in $S_{3}$, one can do better with $4$ symbols. For example, the sequence $1\ 4\ 2\ 3\ 4\ 2$ is the representation of Hamiltonian cycle:
 \[132\rightarrow312\rightarrow123\rightarrow231\rightarrow321\rightarrow213\rightarrow132\]
+
 The following sequence is an example with $5$ symbols for $S_{4}$:
 \[1\ 2\ 3\ 4\ 1\ 2\ 5\ 3\ 4\ 1\ 5\ 3\ 2\ 1\ 4\ 5\ 3\ 2\ 4\ 1\ 3\ 2\ 5\ 4 \]
+
 Let $N(n)$ be the minimum number required for an $U$-cycle of $S_{n}$, it is proved that:
 \[N(2)=2,\ N(3) = 4,\ N(4)=5\ \mathrm{and}\ n+1\leq N(n)\leq 6n\ \mathrm{for}\ n\geq5\]
+
 Fan Chung believes that the equation happens at $n+1$. However, their belief still remains an unsolved conjecture until now.
 \begin{conjecture}
     $N(n)=n+1$.
@@ -70,6 +74,7 @@ There are researches focusing on using generalized the \gls{fkm} algorithm and g
     \item The set of strings $\bfS$ is closed under rotation.
     \item Its subset of necklaces is closed under replacing any suffix of length $i$ by $k^i$. 
 \end{itemize}
+
 Then, the greedy and \gls{fkm} algorithm create the lexicographically smallest universal cycle of $\bfS$. Several such classes $\bfS$ are listed in example~\ref{exp:closed_S}.
 
 \begin{example}\label{exp:closed_S}

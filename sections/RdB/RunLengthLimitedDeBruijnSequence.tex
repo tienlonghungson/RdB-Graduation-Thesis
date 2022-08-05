@@ -22,14 +22,16 @@ Denote $W(n,s)$ the set of all $s$-RLL sequences of length $n$ and note that $W(
     When $n>s$, every sequence in $W(n,s)$ is of the form $0^{i}1\bfx$, where $\bfx \in W(n-i-1,s)$ for $0 \leq i \leq s$. Additionally, for every $\bfx\in W(n-i-1,s)$, the sequence $0^{i}1\bfx$ is an element of $W(n,s)$. This bijection brings the second equation.
 \end{proof}
 
-The very first values of $\card{W(n,s)}$ are listed in table~\ref{tab:values_of_W}. The first row includes values of $n$, while the first column contains value of $s$. The crossed cell of column with $n=i$ and row with $s=j$ holds value of $W(i,j)$. 
+% The very first values of $\card{W(n,s)}$ are listed in table~\ref{tab:values_of_W}. The first row includes values of $n$, while the first column contains value of $s$. The crossed cell of column $n=i$ and row $s=j$ holds value of $\card{W(i,j)}$. 
+Table~\ref{tab:values_of_W} lists the very first values of $\card{W(n,s)}$. Each $\card{W(i,j)}$ is stored at the crossed cell of column $n=i$ with row $s=j$.
 \begin{table}[htbp]
     \centering
     \caption{Values of $W(n,s)$ for all $n=\overline{0,12}$ and $s=\overline{1,9}$.}
-    \begin{tabular}{||c||c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
-    \hline\hline
-        s, n & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12\\
-        \hline\hline
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+    \hline
+        \diagbox{s}{n} & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12\\
+        % \hline\hline
+        \hline
         1 & 1 & 2 & 3 & 5 & 8 & 13 & 21 & 34 & 55 & 89 & 144 & 233 & 377\\
         2 & 1 & 2 & 4 & 7 & 13 & 24 & 44 & 81 & 149 & 274 & 504 & 927 & 1705\\ 
         3 & 1 & 2 & 4 & 8 & 15 & 29 & 56 & 108 & 208 & 401 & 773 & 1490 & 2872\\

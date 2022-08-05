@@ -27,7 +27,11 @@ The maximal asymptotic rate is concerned in case $k$ appears to be very large.
     \end{align}
 \end{definition}
 
-Having the explicit formula of the length of sequence $\bfc_{k,s}$ determined makes it easier to calculate the maximal asymptotic rate of the $(k,s)$-RdB sequence.
+Having the explicit formula of $N(k,s)$ determined makes it easier to calculate the maximal asymptotic rate of the $(k,s)$-RdB sequence. The following equation is a direct consequence of theorem~\ref{theo:maximal_length}:
+\begin{align}
+    N(k,s) = \card{ W(k,s)} - \left(\sum_{i=0}^{C}\card{ W(k-i-s-3,s)} - s\right) + k - 1\label{eq:N_k_s}
+\end{align}
+
 
 Theorem \ref{theo:rate_1} below shows that the rate of $(k,1)$-RdB sequence is better than the rate of Hybrid de Bruijn sequence. Therefore, it's able to use $(k,1)$-RdB sequence for the system in \cite{zhang2021timing} instead to increase rate, speed of encoding and decoding for the transmitted signals.
 
@@ -37,9 +41,21 @@ Theorem \ref{theo:rate_1} below shows that the rate of $(k,1)$-RdB sequence is b
     \end{align}
 \end{theorem}
 \begin{proof}
-    Recall that $N(k,1) = \card{W(k,1)} - \card{W(k-4,1)}$, and $\{\card{W(k,1)}\}$ is a Fibonacci sequence with: 
-    \[\card{W(k,s)} = \dfrac{\phi^{k+2}+\varphi^{k+2}}{\sqrt{5}}-\dfrac{\phi^{k-2}-\varphi^{k-2}}{\sqrt{5}} + k\]
-    where $\phi = \dfrac{1+\sqrt{5}}{2}$ and $\varphi = \dfrac{1-\sqrt{5}}{2}$.
+    Substitute $s=1$ into expression~\ref{eq:N_k_s} gives $N(k,1) = \card{W(k,1)} - \card{W(k-4,1)}$, and recall that $\{\card{W(k,1)}\}$ is a Fibonacci sequence with: 
+    \[\card{W(k,1)} = \dfrac{\phi^{k+2}+\varphi^{k+2}}{\sqrt{5}}\].
+    where $\phi = \dfrac{1+\sqrt{5}}{2}$ and $\varphi = \dfrac{1-\sqrt{5}}{2}$. Here, observe that $\phi\varphi=-1$, so $\phi^{2}\varphi^{2}=1$, consequently, it's able to write:
+    \begin{align*}
+        \left\{\begin{matrix}
+            \phi^{-2} = \varphi^{2} \\
+            \varphi^{-2} = \phi^{2}
+        \end{matrix}\right.
+    \end{align*}
+    As a result: 
+    \begin{align*}
+        \card{W(k,1)} - \card{W(k-4,1)} &= \dfrac{\phi^{k+2}+\varphi^{k+2}}{\sqrt{5}} - \dfrac{\phi^{k-2}+\varphi^{k-2}}{\sqrt{5}}\\
+        &= \dfrac{\phi^{k+2}+\varphi^{k+2}-\phi^{k}\varphi^{2}-\varphi^{k}\phi^{2}}{\sqrt{5}}\\
+        &= \left(\phi^{k}+\varphi^{k}\right).\dfrac{\phi^{2}-\varphi^{2}}{\sqrt{5}}
+    \end{align*}
     And hence:
     \begin{align*}
         R_{1} &= \lim_{k\to\infty}\dfrac{\log(N(k,1))}{k} \\
@@ -62,14 +78,15 @@ The following theorem is the generalization of theorem \ref{theo:rate_1}.
 \end{theorem}
 \begin{proof}
     
-    The root $\omega$ is actually a Pisot number. More particularly, $\omega$ is the only positive roots of~\ref{eq:char_eq} lying in the interval $(1,2)$, the other roots are in the open disk $\left\{z\in\mathbb{C},\card{z}<1\right\}$. Also, note that $x^{s+1}-x^{s}-\ldots-x-1=0$ is the characteristic equation of $W(k,s)$. Therefore, with $k$ big enough, $\card{W(k,s)}$ can be estimated as follows: \[\card{W(k,s)} \approx a.\lvert\omega\rvert^{k}\] whereas $a$ is a positive constant. Thus:
+    The root $\omega$ is actually a Pisot number. More particularly, $\omega$ is the only positive roots of~\ref{eq:char_eq} lying in the interval $(1,2)$, the other roots are in the open disk $\left\{z\in\mathbb{C},\card{z}<1\right\}$. Also, note that $x^{s+1}-x^{s}-\ldots-x-1=0$ is the characteristic equation of $W(k,s)$. Therefore, with $k$ big enough, $\card{W(k,s)}$ can be estimated as follows: \[\card{W(k,s)} \approx a.\lvert\omega\rvert^{k}\] whereas $a$ is a positive constant. Thus, from expression~\ref{eq:N_k_s}:
     \begin{align*}
-        N(k,s) &\approx \sum_{t=k-s}^{k}(k-t+1)a\lvert\omega\rvert^{t-2} + s + k - 1\\
+        N(k,s) &= \card{ W(k,s)} - \left(\sum_{i=0}^{C}\card{ W(k-i-s-3,s)} - s\right) + k - 1 \\
+        &\approx \sum_{t=k-s}^{k}(k-t+1)a\lvert\omega\rvert^{t-2} + s + k - 1\\
         &= \lvert\omega\rvert^{k-s-2}\left( \sum_{t=k-s}^{k}a(k-t+1)\lvert\omega\rvert^{t-k+s} + \dfrac{s+k-1}{\lvert\omega\rvert^{k-s-2}}\right)\\
         &= \lvert\omega\rvert^{k-s-2}\left( \sum_{i=0}^{s}a(i+1)\lvert\omega\rvert^{s-1} + \dfrac{s+k-1}{\lvert\omega\rvert^{k-s-2}}\right) 
     \end{align*}
 
-    So, we obtain:
+    This results in:
     \begin{align*}
         R_{k} &= \lim_{k\to\infty}\dfrac{\log\left( \lvert\omega\rvert^{k-s-2}\left(\sum_{i=0}^{s}a(i+1)\lvert\omega\rvert^{s-1}+\dfrac{s+k-1}{\lvert\omega\rvert^{k-s-2}}\right)\right)}{k} \\
         &= \lim_{k\to\infty}\dfrac{(k-s-2)\log(\lvert\omega\rvert)}{k} + \lim_{k\to\infty}\dfrac{\log\left(\sum_{i=0}^{s}a(i+1)\lvert\omega\rvert^{s-i}+\dfrac{s+k-1}{\lvert\omega\rvert^{k-s-2}}\right)}{k}\\

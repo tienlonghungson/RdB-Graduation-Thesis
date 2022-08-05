@@ -13,7 +13,7 @@ To deal with this problem, the reliable and efficient timing and synchronization
 
 Based on that concept, in~\cite{zhang2021timing}, a \gls{dBTS} is introduced using a beacon with on-off model. In this model, a de Bruijn sequence is transmitted from the satellite to the ground for synchronization. 
 
-The encode process happens at the satellite, where it uses the linear feedback shift register algorithm to generate a positioning sequence (of order $k$ for example). The prerequisite of finding a proper primitive polynomial is the main drawback of this encoder. 
+The encode process happens at the satellite, where it uses the \gls{lfsr} algorithm to generate a positioning sequence (of order $k$ for example). The prerequisite of finding a proper primitive polynomial is the main drawback of this encoder. 
 
 The decode process takes place at the ground station, a look-up table is used to identify the unique position of the received sequences of length $k$. The complexity of this method is exponential.
 
@@ -30,7 +30,7 @@ Furthermore, in this model, a sequence of beacon pulses are used to represent a 
 Table \ref{tab:dBTS} summarized the process, applied methods and drawbacks of \gls{dBTS} system using \gls{HdB} sequence.
 \begin{table}[htbp]
     \centering
-    \caption{timing and synchronizing system use Hybrid de Bruijn code.}
+    \caption{Timing and synchronizing system use Hybrid de Bruijn code.}
     \renewcommand{\arraystretch}{1.25}
     \resizebox{\columnwidth}{!}{
     \begin{tabular}{| p{4.1cm} | p{4.1cm}| p{4.1cm} |}

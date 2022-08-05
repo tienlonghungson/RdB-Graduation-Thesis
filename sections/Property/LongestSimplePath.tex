@@ -4,7 +4,7 @@ Let $N(k,s)$ is the maximal length of a $(k,s)$-RdB sequence, and $\ell(G_{k,s})
 
 The de Bruijn graph $G_{k}$ is actually a Eulerian graph because each vertex has exactly two in-coming edges and two out-coming edges. This results in its longest path visits each edges exactly once and has length $2^{k}$. However, $(k,s)$-RdB graph $G_{k,s}$ doesn't have the same such property since the in-degree and out-degree of each vertex can be one or two. Thus, a simple path which visits all edges of the graph may not exists. 
 
-To overcome this issue, the upper bound $\mathbb{U}(k,s)$ for the length of the longest simple path is first determined in this section. Then, $\mathcal{U}(k,s)=\mathbb{U}(k,s)+k-1$ is the upper bound for the length of longest $(k,s)$-RdB sequence. This work later proves that such bound can be achieved by proposing an efficient encoder returning a sequence of length $\mathcal{U}(k,s)$ in section \ref{subsect:encoder}. Hence, it's sufficient to conclude that the upper bound $\mathbb{U}(k,s)$ is also the length of the longest simple path.
+To overcome this issue, the upper bound $\mathbb{U}(k,s)$ for the length of the longest simple path is first determined in this section. Then, $\mathcal{U}(k,s)=\mathbb{U}(k,s)+k-1$ is the upper bound for the length of longest $(k,s)$-RdB sequence. This work later proves that such bound can be achieved by proposing an efficient encoder returning a sequence of length $\mathcal{U}(k,s)$ in section \ref{subsect:encoder}. Hence, it's sufficient to conclude that the upper bound $\mathbb{U}(k,s)$ is also the length of the longest simple path. In other words, $\ell(G_{k,s})=\mathbb{U}(k,s)$, and $N(k,s)=\mathcal{U}(k,s)$
 
 Before deriving the explicit formula of maximal length, it's necessary to analyze more meticulously the in-degree and out-degree of all vertices. Given $0\leq i,j\leq s$, define:
 
@@ -53,13 +53,13 @@ That is, $V^{k-1,s}$ is the set of all vertices in $G_{k,s}$ satisfying the firs
 % All vertices in $V^{k-1,1}_{0,1}$ has two edges coming in and one edges coming out. Furthermore, among two edges coming out of each vertex $v$ in $V^{k-1,s}_{1,0}$, only one of them coming to a vertex $u$ in $V^{k-1,s}_{0,1}$. Similarly, among two edges coming to each vertex $u$ in $V^{k-1,s}_{0,1}$, only one of them coming from a vertex $v$ in $V^{k-1,s}_{1,0}$. Note that, $\card{ V^{k-1,1}_{0,1}} = \card{ V^{k-1,1}_{1,0}} = \card{ W(k-4,1)}$, therefore, there are precisely $\card{ W(k-4,1)}$ edges, each of which go from a vertex in $V^{k-1,1}_{1,0}$ to a vertex in $V^{k-1,1}_{0,1}$. If we remove all these in 
 
 \begin{theorem}[\textbf{Longest simple path}]\label{theo:maximal_length}
-    Let $C=\min{(s-1,k-s-2)}$. The length of the longest path in $G_{k,s}$ is $\mathbb{U}(k,s)$, where:
+    Let $C=\min{(s-1,k-s-2)}$. The length of the longest path in $G_{k,s}$, $\ell(G_{k,s})$, is equal to $\mathbb{U}(k,s)$, where:
     \begin{align}
-        \mathbb{U}(k,s) = \card{ W(k,s)} - \left(\sum_{i=0}^{C}\card{ W(k-i-d-3,s)} - s\right)
+        \mathbb{U}(k,s) = \card{ W(k,s)} - \left(\sum_{i=0}^{C}\card{ W(k-i-s-3,s)} - s\right)
     \end{align}
 \end{theorem}
 
-As mentioned above, proof of theorem \ref{theo:maximal_length} is divided into 2 parts. While the first one claims $\ell(G_{k,s})\leq\mathbb{U}(k,s)$, the second one shows that there exists a sequence cab achieve the length of $\mathbb{U}(k,s)+k-1$. This section provides the proof of the first part (lemma~\ref{lem:upperbound}). Proof for the second part is available in section \ref{sec:construction}. 
+As mentioned above, proof of theorem \ref{theo:maximal_length} is divided into 2 parts. While the first one claims $\ell(G_{k,s})\leq\mathbb{U}(k,s)$, the second one shows that there exists a sequence can achieve the length of $\mathbb{U}(k,s)+k-1$. This section provides the proof of the first part (lemma~\ref{lem:upperbound}). Proof for the second part is available in section \ref{sec:construction}. 
     
 \begin{lemma}\label{lem:upperbound}
     The longest simple path in $G_{k,s}$'s length cannot exceed $\mathbb{U}(k,s)$, that is, $\ell(k,s)\leq\mathbb{U}(k,s)$.
@@ -132,7 +132,7 @@ Suppose $\mathscr{P}$ to be a longest simple path in $G_{k,s}$. In other word, $
             
             Starts with $\mathcal{P}_{v}=\emptyset$. As $\bfv$ has $2$ in-edges and $1$ out-edges, there's at least $1$ in-edge $e_{v}$ of $\bfv$ not lying in $\mathscr{P}$. Of course, $e_{v}$'s label is $0$. Adds $e_{v}$ to $\mathscr{P}_{v}$. Let $a_{1}0^{j}1x1_{t}0^{s-1}= \pi(e_{v})$ be the initial state of $e_{v}$. If $\pi(e_{v})$ is a balance vertex, then by the claim \ref{claim:balance_ver}, there also must be at least $1$ in-edge of $\pi(e_{v})$ not lying in $\mathscr{P}$. Continue adding this edge to the head of $\mathcal{P}_{v}$. Denote $a_{2}a_{1}0^{j}1x10^{s-2}$ to be the initial state of this edge. Now, $\mathcal{P}_{v}$ can be represented as below:
             
-            \[\mathcal{P}_{v}=[\left(a_{2}a_{1}0^{j}1x1_{t}0^{s-2},a_{1}0^{j}1x1_{t}0^{s-1}\right), \left(a_{1}0^{j}1x1_{t}0^{s-1},0^{j}1x1_{t}0^{s}\right)]\]
+            \[\mathcal{P}_{v}=\left[\left(a_{2}a_{1}0^{j}1x1_{t}0^{s-2},a_{1}0^{j}1x1_{t}0^{s-1}\right), \left(a_{1}0^{j}1x1_{t}0^{s-1},0^{j}1x1_{t}0^{s}\right)\right]\]
             
             Assume inductively that:
             
@@ -185,7 +185,7 @@ Suppose $\mathscr{P}$ to be a longest simple path in $G_{k,s}$. In other word, $
     \end{align*}
     This means at least $\sum_{i=0}^{C} (s-i)\lvert W(k-s-i-3,s) \rvert -s$ edges not lying in $\mathscr{P}$. As the number of edges in $(k,s)$-RdB is $\lvert W(k,s)\rvert$, the length of longest path $\mathscr{P}$ can not exceed : 
     \[\lvert W(k,s)\rvert - (\sum_{i=0}^{C} (s-i)\lvert W(k-s-i-3,s) \rvert- s)\]
-    This concludes our theorem.
+    This concludes our lemma.
 \end{proof}
 
 Define $\mathcal{U}(k,s) = \mathbb{U}(k,s)+(k-1)$, then $\mathcal{U}(k,s)$ is length of the longest $(k,s)$-RdB sequence.

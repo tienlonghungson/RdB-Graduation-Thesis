@@ -1,0 +1,27 @@
+\chapter*{Notation Table} 
+% \begin{table}[htbp]
+%  \centering
+\begin{center}
+    \begin{tabular}{| m{2.5cm} | m{9cm} |}
+     	\hline
+     	\textbf{Notation} &\textbf{ Meaning}\\
+     	\hline
+     	$\Sigma_{q}$ & alphabet of size $q$, $\Sigma_{q}=(0,1,2,\ldots,q-1)$  \\  \hline
+     	$\bfx\in\Sigma^{q}$ & binary sequence $\bfx$ of length $n$ over alphabet $\Sigma$ \\ \hline
+     	$0^{i}$ ($1^{i}$) & concatenation of $i$ symbols $0$ ($1)$ \\ \hline
+     	$W(n,s)$ & set of all sequences of length $n$ containing at most $s$ consecutive bits $0$\\  \hline
+     	$\text{\L}_{n}$ & set of all Lyndon words of length $n$ \\ \hline
+     	$\text{\L}^{(n)}$ & set of all Lyndon words whose length are divisors of $n$ \\ \hline
+     	$\langle\bfx\rangle$ & minimal rotation of sequence $\bfx$ \\ \hline
+     	$G_{k}$ & de Bruijn graph of order $k$ \\  \hline
+     	$G_{k,s} = (V^{k-1,s},E^{k,s})$ & $(k,s)$-RdB graph with vertex set $V^{k-1,s}$, edges set $E^{k,s}$  \\  \hline
+     	$V^{k-1,s}_{i,j}$ & set of all vertices in $G_{k,s}$ satisfying the first $i+1$ letters are $(0,0,\ldots,0,1)$ and the last $j+1$ letters are $(1,0,0,\ldots,0)$ \\  \hline
+     	$\ell(G_{k,s})$ & length of the longest simple path in $G_{k,s}$ \\ \hline
+     	$N(k,s)$ & length of the longest $(k,s)$-RdB sequence \\ \hline
+     	$\mathbb{U}(k,s)$ & upper bound for the length of the longest simple path in $G_{k,s}$ \\ \hline
+     	$\mathcal{U}(k,s)$ & upper bound for the length of the longest $(k,s)$-RdB sequence \\ \hline
+     	
+     \end{tabular}   
+\end{center}
+ 
+% \end{table}

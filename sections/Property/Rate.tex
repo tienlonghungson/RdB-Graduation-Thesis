@@ -7,7 +7,7 @@ For every $(k,s)$-RdB sequence, their rate is defined as follows:
     where the base of logarithm function is $\left\lvert\Sigma\right\rvert=2$.
 \end{definition}
 
-The rates of sequences are the proportion of the data-stream that is useful (non-redundant), tell how much useful information is transmitted. The sequence's rate actually originates from information rate. Recall that, in definition~\ref{def:information_rate}, the rate $R_{C}$ of a code $C$ consisting of length $n$ $q$-ary sequences is $R_{C}=\dfrac{\log_{q}\left(\card{C}\right)}{n}$. If a $(k,s)$-RdB sequence $x_{k,s}$ is considered to be a code $C_{k,s}$, each of its size $k$ windows is treated as a codeword. The size of $C_{k,s}$ is exactly the length of $x_{k,s}$ minus $k$, but the offset $k$ can be omitted under log calculation. Hence: $$R_{C_{k,s}}= \dfrac{\log_{q}\left(\card{C_{k,s}}\right)}{n} = \dfrac{\log(\card{\bfx_{k,s}})}{k} = R(x_{k,s})$$. That is to say, $R(\bfx_{k,s})$ is eventually a kind of information rate.
+The rates of sequences are the proportion of the data stream that is useful (non-redundant), which tell how much useful information is transmitted. The sequence's rate actually originates from the information rate. Recall that, in definition~\ref{def:information_rate}, the rate $R_{C}$ of a code $C$ consisting of length $n$ $q$-ary sequences is $R_{C}=\dfrac{\log_{q}\left(\card{C}\right)}{n}$. If a $(k,s)$-RdB sequence $x_{k,s}$ is considered to be a code $C_{k,s}$, each of its size $k$ windows is treated as a codeword. The size of $C_{k,s}$ is exactly the length of $x_{k,s}$ minus $k$, but the offset $k$ can be omitted under log calculation. Hence: $$R_{C_{k,s}}= \dfrac{\log_{q}\left(\card{C_{k,s}}\right)}{n} = \dfrac{\log(\card{\bfx_{k,s}})}{k} = R(x_{k,s})$$. That is to say, $R(\bfx_{k,s})$ is eventually a kind of information rate.
 
 Note that, a high rate is usually preferred. Accordingly, with each given pair $(k,s)$, the maximal rate of all $(k,s)$-RdB sequence is defined.
 \begin{definition}[Maximal rate]
@@ -17,7 +17,7 @@ Note that, a high rate is usually preferred. Accordingly, with each given pair $
     \end{align}
 \end{definition}
 
-% For the rate $R_{k,s}$, if one cares about the very large $k$, it is when the maximal asymptotic rate of sequence comes to play.
+% For the rate $R_{k,s}$, if one cares about the very large $k$, it is when the maximal asymptotic rate of sequences comes to play.
 
 The maximal asymptotic rate is concerned in case $k$ appears to be very large.
 \begin{definition}[Maximal asymptotic rate]
@@ -33,7 +33,7 @@ Having the explicit formula of $N(k,s)$ determined makes it easier to calculate 
 \end{align}
 
 
-Theorem \ref{theo:rate_1} below shows that the rate of $(k,1)$-RdB sequence is better than the rate of Hybrid de Bruijn sequence. Therefore, it's able to use $(k,1)$-RdB sequence for the system in \cite{zhang2021timing} instead to increase rate, speed of encoding and decoding for the transmitted signals.
+Theorem \ref{theo:rate_1} below shows that the rate of $(k,1)$-RdB sequence is better than the rate of \gls{HdB} sequence. Therefore, it's able to use $(k,1)$-RdB sequence for the system in \cite{zhang2021timing} instead to increase the rate, speed of encoding, and decoding of the transmitted signals.
 
 \begin{theorem}\label{theo:rate_1}
     \begin{align}
@@ -74,7 +74,7 @@ The following theorem is the generalization of theorem \ref{theo:rate_1}.
     \begin{equation}
         x^{s+1}-x^{s}-\ldots-x-1 = 0\label{eq:char_eq}
     \end{equation}
-    such that $\lvert\omega\rvert$ is largest.
+    such that $\lvert\omega\rvert$ is the largest.
 \end{theorem}
 \begin{proof}
     

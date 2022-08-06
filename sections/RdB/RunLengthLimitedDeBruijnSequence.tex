@@ -1,4 +1,4 @@
-Let $n,k,s,q$ be some positive integers and $\Sigma_{q} = \left\{0,1,2,\ldots,q-1\right\}$ be an alphabet of size $q$. A \emph{sequence} $\bfs=\left(s_{1},s_{2},\ldots,s_{n}\right)\in\Sigma^{n}_{q}$ is over an alphabet $\Sigma$, that is, $s_{i}\in\Sigma_{q}$. This thesis only focuses on the case $q=2$ and thus drop $q$ in notation for simplicity. Sequence $\bfs=s_{1}s_{2}\ldots s_{n}\in\Sigma^{n}$ is also written without ambiguity. The window (substring) $(s_{i},s_{i+1},\ldots,s_{j})$ is denoted by $s[i,j]$. 
+Let $n,k,s,q$ be some positive integers and $\Sigma_{q} = \left\{0,1,2,\ldots,q-1\right\}$ be an alphabet of size $q$. A \emph{sequence} $\bfs=\left(s_{1},s_{2},\ldots,s_{n}\right)\in\Sigma^{n}_{q}$ is over an alphabet $\Sigma$, that is, $s_{i}\in\Sigma_{q}$. This thesis only focuses on the case $q=2$ and thus drops $q$ in the notation for simplicity. Sequence $\bfs=s_{1}s_{2}\ldots s_{n}\in\Sigma^{n}$ is also written without ambiguity. The window (substring) $(s_{i},s_{i+1},\ldots,s_{j})$ is denoted by $s[i,j]$. 
 
 Given two sequences $\bfx=x_{1}x_{2}\ldots x_{m}$ and $\bfy=y_{1}y_{2}\ldots y_{n}$, denote the concatenation of $\bfx$ and $\bfy$ to be $\bfx\bfy $ $=x_{1}x_{2}\ldots x_{m}y_{1}y_{2}\ldots y_{n}$, and denote $\bfx^{k}$ the concatenation of $k$ copies of $\bfx$. It is said that $\bfx$ is smaller than $\bfy$, denoted $\bfx<\bfy$, if there is an index $t\geq1$, such that $x_{i}=y_{i}$, $\forall i\leq t$, and $x_{t+1}<y_{t+1}$. Note that empty sequence is smaller than $0$.
 
@@ -22,7 +22,7 @@ Denote $W(n,s)$ the set of all $s$-RLL sequences of length $n$ and note that $W(
     When $n>s$, every sequence in $W(n,s)$ is of the form $0^{i}1\bfx$, where $\bfx \in W(n-i-1,s)$ for $0 \leq i \leq s$. Additionally, for every $\bfx\in W(n-i-1,s)$, the sequence $0^{i}1\bfx$ is an element of $W(n,s)$. This bijection brings the second equation.
 \end{proof}
 
-% The very first values of $\card{W(n,s)}$ are listed in table~\ref{tab:values_of_W}. The first row includes values of $n$, while the first column contains value of $s$. The crossed cell of column $n=i$ and row $s=j$ holds value of $\card{W(i,j)}$. 
+% The very first values of $\card{W(n,s)}$ are listed in table~\ref{tab:values_of_W}. The first row includes values of $n$, while the first column contains the value of $s$. The crossed cell of column $n=i$ and row $s=j$ holds value of $\card{W(i,j)}$. 
 Table~\ref{tab:values_of_W} lists the very first values of $\card{W(n,s)}$. Each $\card{W(i,j)}$ is stored at the crossed cell of column $n=i$ with row $s=j$.
 \begin{table}[htbp]
     \centering
@@ -56,6 +56,6 @@ Example~\ref{exp:RdB} gives an instance of \gls{RdB} sequence.
 
 Note that, when $s\geq k$, a $(k,s)$-RdB sequence is just an original de Bruijn sequence. If $s=k-1$, any $(k,k-1)$-RdB sequence can be achieved from a de Bruijn sequence removing $1$ letter $0$ in the subsequence $0^k$. Based on those observations, case $s\geq k-1$ is considered to be trivial. Therefore, this thesis concentrates on the case $s<k-1$. And thus, in the rest of this thesis, $s$ is always assumed to be smaller than $k-1$.
 
-It is well-known that given $k$, the maximal length $n$ of a binary acyclic de Bruijn sequence is $n=2^{k}+k-1$. Let $N(k,s)$ be the maximal length of a $(k,s)$-RdB sequence. This thesis are interested in finding the exact value of $N(k,s)$. The motivation of this task is explain clearly in section \ref{sec:rate}, which concerns the rate of a sequence. 
+It is well-known that given $k$, the maximal length $n$ of a binary acyclic de Bruijn sequence is $n=2^{k}+k-1$. Let $N(k,s)$ be the maximal length of a $(k,s)$-RdB sequence. This thesis is interested in finding the exact value of $N(k,s)$. The motivation of this task is explained clearly in section \ref{sec:rate}, which concerns the rate of a sequence. 
 
-For further demonstration, the next section presents the graph presentation for $(k,s)$-RdB sequence.
+For further demonstration, the next section presents the graph presentation for the $(k,s)$-RdB sequence.

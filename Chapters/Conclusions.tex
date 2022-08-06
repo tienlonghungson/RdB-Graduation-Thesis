@@ -1,10 +1,14 @@
 \section*{Summary}
-This thesis proposes to use the RdB sequences in the \gls{dBTS} system. This is a new kind of sequence having many advantages in synchronization and avoiding the long period of no pulses in quantum communication or satellite channels. Some properties of the sequences have been studied for the first time in this thesis. The first explicit formula of the maximal length of the \gls{RdB} sequence is also provided. Furthermore, this thesis presents a construction of an optimal RLL dBs with sub-linear encoding/decoding algorithms. 
+In this thesis, Run length limited de Bruijn sequences are introduced and studied to replace Hybrid de Bruijn sequence in \gls{dBTS} system. Compare to \gls{HdB} sequences, \gls{RdB} sequences not only have a higher rate but are also more general and adaptive. The main results of this thesis include the explicit formula of the maximal length and maximal asymptotic rate of \gls{RdB} sequences. To achieve such length and rate, an encoding algorithm is presented. This thesis also provides proof of the optimality of the encoder. To locate the position of a proper substring in the whole encoded sequence, a decoding algorithm is proposed based on the decoder of the granddaddy sequence. The encoder and decoder are both based on state-of-the-art algorithms. The encoder's complexity is constant amortized time per symbol, and the decoder's complexity is sub-linear with respect to the length of the \gls{RdB} sequence. 
 
 \section*{Future works}
-In future work, it's critical to analyze more deeper about the RdB sequence under some other constraints like weight constraint or local constraint. The current results right now just focus on alphabet of size $2$. The study of more general alphabet will raise many more questions in combinatorics and algorithm. Especially, results for the alphabet of size $4$ will be valuable in the research of DNA storage as well as DNA sequencing, a very interested field recently.
+In future work, it's critical to analyze deeper about the RdB sequence under some other constraints like weight constraint or local constraint. The current results right now just focus on the alphabet of size $2$. The study of the more general alphabet will raise many more questions in combinatorics and algorithm. Especially, results for the alphabet of size $4$ will be valuable in the research of DNA storage as well as DNA sequencing, a very interesting field recently.
 
 \section*{Publications}
+\begin{enumerate}
+    \item Yeow Meng Chee, Duc Tu Dao, \textbf{Tien Long Nguyen}, Duy Hoang Ta, Van Khu Vu. "Run Length Limited de Bruijn Sequences for Quantum Communications", The 2022 IEEE International Symposium on Information Theory.
+    \item Tran Ba Trung, Lijun Chang, \textbf{Nguyen Tien Long}, Kai Yao, Huynh Thi Thanh Binh. "Verification-Free Approaches to Efficient Locally Densest Subgraph Discovery", The 39th IEEE International Conference on Data Engineering.
+\end{enumerate}
 % \section{Summary}
 
 % Sinh viên nhắc lại các vấn đề mà đồ án đã giải quyết được, cũng như những vấn đề còn tồn đọng của đồ án.  

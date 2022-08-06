@@ -1,6 +1,6 @@
  In this section, a labeled graph, called $(k,s)$-RdB graph, is used to represent $(k,s)$-RdB sequences. Just like a de Bruijn graph of order $k$, any simple path in $(k,s)$-Rdb graph represents a $(k,s)$-RdB sequence.
 
-A $(k,s)$-RdB graph can be achieved by eliminating all the vertices containing more than $s$ consecutive letter $0$ in the de Bruijn graph $G_{k}$. As a result, the vertices of a $(k,s)$-RdB graph are represented by binary sequence of length $k-1$ which don't contain pattern $0^{s+1}$.
+A $(k,s)$-RdB graph can be achieved by eliminating all the vertices containing more than $s$ consecutive letter $0$ in the de Bruijn graph $G_{k}$. As a result, the vertices of a $(k,s)$-RdB graph are represented by binary sequences of length $k-1$ which don't contain pattern $0^{s+1}$.
 
 The illustration for de Bruijn graph of order $4$, $G_{4}$, was given in figure \ref{fig:dB4}. To obtain $(4,1)$-Rdb graph from there, vertices $000,001,100$ are deleted. Figure~\ref{fig:RdB_4_1} demonstrates the $(4,1)$-RdB graph.
 
@@ -19,7 +19,7 @@ Denote the $(k,s)$-RdB graph to be $G_{k,s} = (V^{k-1,s},E^{k,s})$, where $V^{k-
     \end{align}
 \end{lemma}
 \begin{proof}
-    This proof is deduced directly from the construction of $G_{k,s}$, since its set of all vertices is the set of all length $k-1$ sequences containing at most $s$ consecutive letters $0$. 
+    This proof is deduced directly from the construction of $G_{k,s}$ since its set of all vertices is the set of all length $k-1$ sequences containing at most $s$ consecutive letters $0$. 
 \end{proof}
 
 \begin{lemma}[\textbf{Number of edges}]\label{lem:num_edges}

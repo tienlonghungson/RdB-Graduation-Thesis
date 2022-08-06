@@ -8,14 +8,14 @@ This section presents a construction of a $(k,s)$-RdB sequence $\bfc_{k,s}$. Fur
 \end{definition}
 For more intelligible, several Lyndon words and non-Lyndon words are provided in example~\ref{exp:Lyndon}.
 \begin{example}[Lyndon words]\label{exp:Lyndon}
-    The word $00101$ is a Lyndon word, since it is smaller than all of its rotation: $01010$, $10100$, $01001$, $10010$. The word $01100$ is not a Lyndon word, since one of its rotations, $00011$, is smaller than it. The word $011011$ is also not a Lyndon word, as its cyclic rotation by $3$ letters is equal to it. 
+    The word $00101$ is a Lyndon word since it is smaller than all of its rotations: $01010$, $10100$, $01001$, $10010$. The word $01100$ is not a Lyndon word, since one of its rotations, $00011$, is smaller than it. The word $011011$ is also not a Lyndon word, as its cyclic rotation by $3$ letters is equal to it. 
 \end{example}
 
 \subsection{Encoder for a\texorpdfstring{$(k,s)$}{(k,s)}-RdB sequence} \label{subsect:encoder}
-In 1978, Fredricksen and Maiorana~\cite{fredricksen1978necklaces} proposed the \gls{fkm} algorithm to efficiently construct the lexicographically minimal de Bruijn sequence, which is later called granddaddy sequence by Knuth~\cite{knuth2013art}. The algorithm was based on their finding of the connection between de Bruijn sequence and Lyndon words.
+In 1978, Fredricksen and Maiorana~\cite{fredricksen1978necklaces} proposed the \gls{fkm} algorithm to efficiently construct the lexicographically minimal de Bruijn sequence, which is later called the granddaddy sequence by Knuth~\cite{knuth2013art}. The algorithm was based on their finding of the connection between the de Bruijn sequence and Lyndon words.
 
 \begin{lemma}[\cite{fredricksen1978necklaces}]\label{lem:FKM}
-    The lexicographically minimal de Bruijn sequence of order $k$ ($k$-MdB) is the concatenation of all Lyndon words whose length is a divisor of $k$ in the lexicographically order.
+    The lexicographically minimal de Bruijn sequence of order $k$ ($k$-MdB) is the concatenation of all Lyndon words whose length is a divisor of $k$ in the lexicographical order.
 \end{lemma}
 
 For example, the $6$-MdB sequence is decomposed into Lyndon words as follows:
@@ -59,7 +59,7 @@ This thesis observes that it is able to append a prefix to a suffix of $k$-MdB t
 %     \label{fig:my_label}
 % \end{figure}
 
-More precisely, the construction is described as follow:
+More precisely, the construction is described as follows:
 \begin{construction}\label{constr:encoder}
     Let $\bfx=(x_{1},\ldots,x_{n})$ be the $k$-MdB constructed from Lemma~\ref{lem:FKM} and $u_{k,s}= 0^{s+1}1^{k-s-1}$ be a Lyndon word of length $k$ satisfying the first $s+1$ letters are all $0$'s and the last $k-s-1$ letters are all $1$'s. By the intrinsic property of de Bruijn sequences, there exists only one index $i$ such that $\bfu_{k,s}=\bfx[i,i+k-1]=(x_{i},\ldots,x_{i+k-1})$. Denote the word $\bfc_{k,s} = (x_{i+1},\ldots,x_{n},0,0,\ldots,0)$, obtained by adding $s$ letters $0$ to the end of the suffix of $\bfx$, from index $i+1$ to the end. Theorem \ref{theo:validity} below claims that $\bfc_{k,s}$ is a $(k,s)$-RdB sequence. 
 \end{construction}
@@ -110,11 +110,11 @@ Now, theorem \ref{theo:validity} proves that the Construction~\ref{constr:encode
 \begin{proof}
     First, it's necessary to show that each substring of length $k$ appears at most once in $\bfc_{k,s}$. Note that the granddaddy sequence $\bfx$ obtained from Lemma~\ref{lem:FKM} is a cyclic de Bruijn sequence, and $\bfc_{k,s}$ is actually a substring of $\bfx$. Hence, $\bfc_{k,s}$ just contains each substring of size $k$ at most once.
     
-    Now, claiming that $\bfc_{k,s}$ doesn't contain any patterns $0^{s+1}$ will complete the theorem. This can be proved by considering the property of Lyndon words. It's obvious to see that $\bfu_{k,s}=0^{s+1}1^{k-s-1}$ is the largest Lyndon word containing $s+1$ consecutive symbols $0$. Hence, every Lyndon words decomposed from $\bfc_{k,s}$ doesn't take $0^{s+1}$ as a substring. Moreover, the last symbol of all Lyndon words but $0$ is $1$. Therefore, $0^{s+1}$ will not appear in the combination of Lyndon words larger than $\bfu_{k,s}$. Adding $0^{s}1^{k-s-1}$ to the beginning and $s$ letters $0$ to the end of this combination resulting in $\bfc_{k,s}$ won't change this property. So, it's able to conclude that $\bfc_{k,s}$ is indeed a $(k,s)$-RdB sequence.
+    Now, claiming that $\bfc_{k,s}$ doesn't contain any patterns $0^{s+1}$ will complete the theorem. This can be proved by considering the property of Lyndon words. It's obvious to see that $\bfu_{k,s}=0^{s+1}1^{k-s-1}$ is the largest Lyndon word containing $s+1$ consecutive symbols $0$. Hence, every Lyndon word decomposed from $\bfc_{k,s}$ doesn't take $0^{s+1}$ as a substring. Moreover, the last symbol of all Lyndon words but $0$ is $1$. Therefore, $0^{s+1}$ will not appear in the combination of Lyndon words larger than $\bfu_{k,s}$. Adding $0^{s}1^{k-s-1}$ to the beginning and $s$ letters $0$ to the end of this combination resulting in $\bfc_{k,s}$ won't change this property. So, it's able to conclude that $\bfc_{k,s}$ is indeed a $(k,s)$-RdB sequence.
 \end{proof}
 
 \subsection{Decoder for a \texorpdfstring{$(k,s)$}{(k,s)}-RdB sequence}
-In~\cite{zhang2021timing}, the Hybrid de Bruijn sequence of order $k$ after being received needs to be decoded for correcting errors. More particularly, it's necessary to indicating the exact location of an arbitrary sequence of length $k$ in the Hybrid de Bruijn sequence. To do that, they proposed to use look-up table, which is {\color{blue} is an exponential complex method}.
+In~\cite{zhang2021timing}, the Hybrid de Bruijn sequence of order $k$ after being received needs to be decoded for correcting errors. More particularly, it's necessary to indicate the exact location of an arbitrary sequence of length $k$ in the Hybrid de Bruijn sequence. To do that, they proposed to use a look-up table, which is an exponential complex method.
 
 Similarly, it's essential for this work to decode $\bfc_{k,s}$. In 2016, Kociumaka, Radoszewski, and Rytter presented the first sub-linear decoding algorithm $\cD_{KRR}$ for the minimal de Bruijn sequences. And since $\bfc_{k,s}$ is a substring of a minimal de Bruijn sequence, it's able to modify $\cD_{KRR}$ to decode $\bfc_{k,s}$ in sub-linear time. 
 
@@ -132,20 +132,20 @@ Let $i=\cD_{KRR}(\bfu_{k,s})$ be the position of the word $\bfu_{k,s}$ in the gr
      \tcc{ $\cD_{KRR}$ is the decoder of the minimal de Bruijn sequence in \cite{kociumaka2016efficient}}
      \If {$\bfv = 1^{j}0^{k-j}$,}{\KwRet{$n-i+1-(k-j)$};}
      \Else{\KwRet{$\cD_{KRR}(\bfv)-i$};}
-    \caption{Decode (k,s)-RLL dBs $\bf\bfc_{k,s}$}
+    \caption{Decode (k,s)-RdB $\bf\bfc_{k,s}$}
     \label{alg:decode}
 \end{algorithm}
 
 \subsection{The optimality of our construction}
 This section gives proof for the claim stated in section \ref{sec:graph_representation}, that is, the encoder produces sequence $\bfc_{k,s}$ whose length equals to to upper bound $\mathcal{U}(k,s)$, and thus, $\bfc_{k,s}$ is the longest the $(k,s)$-RdB sequence. In order to do so, $\bfc_{k,s}$'s length, denoted by $\ell(\bfc_{k,s})$, is needed calculating first. It's then essential to show that $\ell(\bfc_{k,s})$ is equal to $\mathcal{U}(k,s)$ by some algebraic transformations.
 
-Given a word $u$, denote $\langle u\rangle$ to be its minimal rotation. For instance, the minimal rotation of 010110 is 001011, or, the minimal rotation of 010101 is itself. For every word $v$, we define:
+Given a word $\bfu$, denote $\langle \bfu\rangle$ to be its minimal rotation. For instance, the minimal rotation of 010110 is 001011, or, the minimal rotation of 010101 is itself. For every word $\bfv$, we define:
 \begin{align*}
-    S(v) = \left\{u: u\in\Sigma^{\card{ v}},\langle u\rangle\leq v\right\}
+    S(\bfv) = \left\{\bfu: \bfu\in\Sigma^{\card{ \bfv}},\langle \bfu\rangle\leq \bfv\right\}
 \end{align*}
-to be the set of all sequence of length $\card{ v}$ satisfying their minimal rotation don't exceed $v$. The following example~\ref{exp:S_v} lists all element of $S(v)$ with $v=01101$.
-\begin{example}[Example of $S(v)$]\label{exp:S_v}
-    Given $v= 01101$, all sequence of length $\card{v}=5$ whose minimal rotations are at most $v$ is:
+to be the set of all sequence of length $\card{ \bfv}$ satisfying their minimal rotation doesn't exceed $\bfv$. The following example~\ref{exp:S_v} lists all element of $S(\bfv)$ with $\bfv=01101$.
+\begin{example}[Example of $S(\bfv)$]\label{exp:S_v}
+    Given $\bfv= 01101$, all sequence of length $\card{\bfv}=5$ whose minimal rotations are at most $\bfv$ is:
     \begin{align*}
         S(01101) = \bigl\{ &00000,\\
         &00001,00010,00100,01000,10000, \\
@@ -153,7 +153,7 @@ to be the set of all sequence of length $\card{ v}$ satisfying their minimal rot
         &00111,01110,11100,11001,10011 \bigl\}
     \end{align*}
 \end{example}
-If $v$ is a Lyndon word, Lemma 29 in \cite{kociumaka2016efficient} tells that the cardinality of $S(v)$, $\card{ S(v)}$, equals to the length of the prefix of the granddaddy sequence $x$, from the beginning to the sub-string $v$. Recall that $\bfu_{k,s}$ is also a Lyndon word, one have:
+If $\bfv$ is a Lyndon word, Lemma 29 in \cite{kociumaka2016efficient} tells that the cardinality of $S(\bfv)$, $\card{ S(\bfv)}$, equals to the length of the prefix of the granddaddy sequence $\bfx$, from the beginning to the sub-string $\bfv$. Recall that $\bfu_{k,s}$ is also a Lyndon word, one has:
 \begin{align}
     \card{ S(\bfu_{k,s})} &= 2^{k}- (\ell(\bfc_{k,s}) - (k-1) -s ) \nonumber\\
     \Leftrightarrow  \ell(\bfc_{k,s}) &= 2^{k}+(k-1)+s-\card{ S(\bfu_{k,s})} \label{eq:cks&sks}
@@ -243,7 +243,7 @@ where $\cC_{1}$ and $\cC_{2}$ are defined in Equation~\ref{eq:c1} and \ref{eq:c2
         \cdots \\
         \card{ W(k-s-1,s)} = &\card{ W(k-s-2,s)} + \card{ W(k-s-3,s)}+\cdots + \card{ W(k-2s-2,s)}
     \end{matrix}\right.\]
-    Adding the above equations side by side results in the equation $(*)$, which is needed to be verified.
+    Adding side by side the above equations results in the equation $(*)$, which is needed to be verified.
     
     \textbf{Case 2}: $M=s+3,\ C=s-1$ when $k=2s+2,s<k-1$. 
     The \gls{lhs} is the same as in the first case, meanwhile, the \gls{rhs} is :
@@ -273,7 +273,7 @@ where $\cC_{1}$ and $\cC_{2}$ are defined in Equation~\ref{eq:c1} and \ref{eq:c2
         \card{ W(k-s-1,s)} &= \card{ W(k-s-2,s)} + \card{ W(k-s-3,s)} +\ldots+ \card{ W(-1,s)} \\
     \end{matrix}\right.\]
 
-    Once again, adding the above equations side by side gives $(**)$.
+    Once again, adding side by side the above equations gives $(**)$.
     
     In conclusion, in all $3$ cases, the correctness of equation \ref{eq:2length_equal_v2} is verified, hence, Lemma~\ref{lemma:2_length_equal} is proved.
 \end{proof}

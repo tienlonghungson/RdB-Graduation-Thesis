@@ -64,17 +64,24 @@ Theorem \ref{theo:rate_1} below shows that the rate of $(k,1)$-RdB sequence is b
     \end{align*}
 \end{proof}
 
-The following theorem is the generalization of theorem \ref{theo:rate_1}.
+Note that $\phi$ is the largest root of equation $x^{2}-x-1=0$. Based on that observation, the prediction here is that if $\omega$ is the root of equation:
+\begin{equation}
+    x^{s+1}-x^{s}-\ldots-x-1 = 0\label{eq:char_eq}
+\end{equation}
+satisfying $\card{\omega}$ is the largest, the maximal asymptotic rate $R_{s}=\log(\lvert\omega\rvert)$. Fortunately, this is proved to be true in the following theorem, the generalization of theorem \ref{theo:rate_1}.
+    
+
+% The following theorem is the generalization of theorem \ref{theo:rate_1}.
 \begin{theorem}[Maximal asymptotic rate of RdB sequence]\label{theo:rate_s}
-    Let $k$ be a positive integer. Then:
+    Let $s$ be a positive integer. Then:
     \begin{align}
         R_{s} = \log(\lvert\omega\rvert)
     \end{align}
-    where $\omega$ is the root of equation: %\inlineequation[eq:inline]{x^{s+1}-x^{s}-\ldots-x-1 = 0}
-    \begin{equation}
-        x^{s+1}-x^{s}-\ldots-x-1 = 0\label{eq:char_eq}
-    \end{equation}
-    such that $\lvert\omega\rvert$ is the largest.
+    % where $\omega$ is the root of equation $a=b+1\inlineeqno$:
+    % \begin{equation}
+    %     x^{s+1}-x^{s}-\ldots-x-1 = 0\label{eq:char_eq}
+    % \end{equation}
+    % such that $\lvert\omega\rvert$ is the largest.
 \end{theorem}
 \begin{proof}
     
@@ -94,6 +101,12 @@ The following theorem is the generalization of theorem \ref{theo:rate_1}.
     \end{align*}
     
 \end{proof}
+
+Table~\ref{tab:log_omega} lists the first $8$ values of $\log(\omega)$ with respect to $s$ from $1$ to $8$. 
+\input{Tables/LogOmega}
+
+To demonstrate the convergence of $R_{k,s}$ to $\log(\card{\omega})$, table~\ref{tab:convergence} lists the first values of $R_{k,s}$ with $k=\overline{2,4}$ and then increase to the large $k=\overline{71,74}$.
+\input{Tables/LogRate}
 % \begin{figure*}[!ht]
 %     \centering
 %       \begin{subfigure}{0.9\linewidth}
